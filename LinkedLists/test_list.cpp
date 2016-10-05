@@ -26,6 +26,12 @@ int main()
     std::cout << *loner << std::endl;
 
     testList.printList();
+    testList.insertAtPosition(12.23,1);
+    testList.insertAtPosition(15,1);
+    testList.insertAtPosition(16,3);
+    testList.printList();
+    std::cout << "Head data: "<< testList.getDataAtHead() << std::endl;
+    std::cout << "Tail data: "<< testList.getDataAtTail() << std::endl;
     //Insert a pointer to a node
     /*Node<float> * loner= new Node<float>(3.1415);
     std::cout << "This is the data in the node: " << loner << std::endl;
