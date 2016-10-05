@@ -32,6 +32,15 @@ int main()
     testList.printList();
     std::cout << "Head data: "<< testList.getDataAtHead() << std::endl;
     std::cout << "Tail data: "<< testList.getDataAtTail() << std::endl;
+    testList.clear();
+    testList.insertHead(41234.44);
+    testList.insertHead(34.45);
+    testList.insertAtPosition(23,1);
+    std::cout << "Head data: "<< testList.getDataAtHead() << std::endl;
+    std::cout << "Tail data: "<< testList.getDataAtTail() << std::endl;
+    std::cout << "Data at 1: "<< testList.getDataAtPosition(1) << std::endl;
+    std::cout << "Data at 0: "<< testList.getDataAtPosition(0) << std::endl;
+
     //Insert a pointer to a node
     /*Node<float> * loner= new Node<float>(3.1415);
     std::cout << "This is the data in the node: " << loner << std::endl;

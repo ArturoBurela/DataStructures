@@ -10,6 +10,7 @@ gilecheverria@yahoo.com
 #define NODE_H
 
 #include <iostream>
+#include <stdexcept>
 
 template <class T>
 class Node {

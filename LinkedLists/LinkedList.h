@@ -35,7 +35,7 @@ class LinkedList {
         // Search methods
         T getDataAtHead();
         T getDataAtTail();
-        //T getDataAtPosition();
+        T getDataAtPosition(int position);
         // Print methods
         void printList ();
 };
@@ -55,6 +55,7 @@ void LinkedList<T>::clear() {
     delete item;
     item = head;
   }
+  length = 0;
 }
 
 ////// INSERTION METHODS //////
@@ -88,7 +89,6 @@ void LinkedList<T>::insertTail (Node<T> * new_node)
 {
   if (head == nullptr) {
     insertHead(new_node);
-    length +=1;
   }
   else{
     Node<T> * item = head;
@@ -108,13 +108,16 @@ void LinkedList<T>::insertAtPosition (Node<T> * new_node, int position){
     }else{
       Node<T> * item = head;
       int i = 0;
+      //Loop until the position
       while (i<position-1) {
         item = item->getNext();
         i++;
       }
       //std::cout << "Prueba" << std::endl;//Prueba
+      //Set the new links 
       new_node->setNext(item->getNext());
       item->setNext(new_node);
+      length += 1;
           //new_node.setNext();
     }
   }else{
@@ -138,26 +141,49 @@ void LinkedList<T>::insertAtPosition (T data, int position){
 template <class T>
 T LinkedList<T>::getDataAtHead(){
   if(length>0){
+    //Return the head data;
   return head->getData();
   }else{
-    std::cout << "No head in the list" << std::endl;
-    return -1; // Does not work with strings, What to return for every T ???
+    //std::cout << "No head in the list" << std::endl;
+    //throw(-1); // Does not work with strings, What to return for every T ???
+    return -1;
   }
 }
 template <class T>
 T LinkedList<T>::getDataAtTail(){
   if(length>0){
     Node<T> * item = head;
+    //Loop until the end of the list
     while (item->getNext() != nullptr) {
       item = item->getNext();
     }
+    //Return the tail data
     return item->getData();
   }else{
-    std::cout << "No tail in the list" << std::endl;
-    return -1; // Does not work with strings, What to return for every T ???
+    //std::cout << "No tail in the list" << std::endl;
+    //throw(-1); // Does not work with strings, What to return for every T ???
+    return -1;
   }
 }
-//T getDataAtPosition();
+template<class T>
+T LinkedList<T>::getDataAtPosition(int position){
+  if(length>0){
+    Node<T> * item = head;
+    //Create varible in order to keep te position int
+    int i = 0;
+    //Loop until the position
+    while (i!=position) {
+      item = item->getNext();
+      i++;
+    }
+    //Return the data
+    return item->getData();
+  }else{
+    //std::cout << "No tail in the list" << std::endl;
+    //throw(-1); // Does not work with strings, What to return for every T ???
+    return -1;
+  }
+}
 
 //////DELETE METHODS /////
 template <class T>
@@ -170,6 +196,8 @@ Node<T> * LinkedList<T>::removeHead(){
   head = item->getNext();
   //Disconect the node
   item->setNext(nullptr);
+  //Reduce the list length
+  length -= 1;
   //Return the node just removed
   return item;
 }
@@ -182,6 +210,7 @@ Node<T> * LinkedList<T>::removeTail(){
   if(head->getNext()== nullptr){
     Node<T> * item = head;
     head = nullptr;
+    length -= 1;
     return item;
   }
   //More than one element
@@ -193,6 +222,7 @@ Node<T> * LinkedList<T>::removeTail(){
   }
   //Change the tail of the list
   previous->setNext(nullptr);
+  length -= 1;
   return item;
 }
 //Node<T> * removeItem(T data);
