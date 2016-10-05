@@ -1,0 +1,12 @@
+10
+Luigi Math 100 Physics 1 Japanese 2 Spanish 33 Biology 4 DataStructures 5
+Mario Math 100 Physics 24 Japanese 45 Spanish 100 Biology 45 DataStructures 3
+Horacio Math 100 Physics 76 Japanese 100 Spanish 3 Biology 4 DataStructures 100
+Juan Math 100 Physics 100 Japanese 23 Spanish 45 Biology 100 DataStructures 23
+Daniela Math 100 Physics 45 Japanese 56 Spanish 67 Biology 78 DataStructures 89
+Jaime Math 100 Physics 50 Japanese 100 Spanish 50 Biology 100 DataStructures 50
+Arturo Math 89 Physics 90 Japanese 67 Spanish 45 Biology 78 DataStructures 100
+Fernando Math 56 Physics 78 Japanese 89 Spanish 78 Biology 67 DataStructures 100
+Cersei Math 84 Physics 98 Japanese 84 Spanish 78 Biology 76 DataStructures 88
+Alejandra Math 91 Physics 86 Japanese 85 Spanish 87 Biology 80 DataStructures 100
+EOF
