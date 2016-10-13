@@ -53,7 +53,7 @@ void Stack<T>::push (Node<T> * new_node)
 }
 
 template <class T>
-T Stack<T>::pop ()
+Node<T> * Stack<T>::pop ()
 {
     T data = head->getData();
     Node<T> * item = head;

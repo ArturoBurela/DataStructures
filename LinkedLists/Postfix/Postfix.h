@@ -22,6 +22,7 @@ public:
   void setInfix (std::string _infix) { infix = _infix; }
   void convertToPostfix();
   int evaluate();
+  std::getPostfix();
 };
 
 int Postfix::computeOperator(int num1, int num2, char sign)
@@ -112,8 +113,13 @@ void Postfix::convertToPostfix(){
     }
 }
 
-int Postfix::evaluate(){
-  
-}
+//int Postfix::evaluate(){
+//  while (!conversionStack.isEmpty()) {
+    /* code */
+    //int result;
+
+  //  conversionStack.pop();
+  //}
+//}
 
 #endif
