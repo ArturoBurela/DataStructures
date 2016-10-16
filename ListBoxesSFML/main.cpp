@@ -12,8 +12,8 @@ int main()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                //window.close();
-		window.setSize(sf::Vector2u(640, 480));
+                window.close();
+                //window.setSize(sf::Vector2u(640, 480));
         }
 
         window.clear();
