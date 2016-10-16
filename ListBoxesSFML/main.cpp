@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include "LinkedList.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
@@ -22,4 +22,8 @@ int main()
     }
 
     return 0;
+    LinkedList<int> ok;
+    ok.insertTail(1);
+    ok.insertHead(2);
+    ok.printList();
 }
