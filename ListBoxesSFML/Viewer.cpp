@@ -1,3 +1,9 @@
+/*
+Arturo Burela
+A01019906
+
+Modified viewer class used to draw while using the terminal
+*/
 #include "Viewer.h"
 #include <iostream>
 #include <string>
@@ -18,6 +24,7 @@ Viewer::Viewer(std::string window_title, std::string font_name, void (*menu)(std
 
 void Viewer::configure()
 {
+  /*
     // Configure the title object
     title.setFont(font);
     title.setCharacterSize(24);
@@ -43,7 +50,7 @@ void Viewer::configure()
     circle.setOutlineThickness(20.f);
     circle.setOutlineColor(sf::Color::Black);
     circle.setOrigin(circle.getRadius(), circle.getRadius());
-
+    */
 }
 
 void Viewer::windowListener()
@@ -58,33 +65,11 @@ void Viewer::windowListener()
             {
                 case sf::Event::Closed:
                     window.close();
-                    std::cout << "Window closed. Exiting the program." << std::endl;
+                    std::cout << "Saliendo..." << std::endl;
                     exit(0);
-                    break;
-                case sf::Event::KeyReleased:
-                    if (event.key.code == sf::Keyboard::R)
-                        circle.setRadius(100);
-                    if (event.key.code == sf::Keyboard::Add)
-                        speed+=10;
-                    if (event.key.code == sf::Keyboard::Subtract)
-                        speed-=10;
-                    break;
-                case sf::Event::MouseWheelMoved:
-                    float radius = circle.getRadius();
-                    if (event.mouseWheel.delta > 0 && radius < 300)
-                    {
-                        radius += scale_factor;
-                        circle.setRadius(radius);
-                    }
-                    else if (event.mouseWheel.delta < 0 && radius > 0.5)
-                    {
-                        radius -= scale_factor;
-                        circle.setRadius(radius);
-                    }
                     break;
             }
         }
-
         mainDraw();
     }
 }
