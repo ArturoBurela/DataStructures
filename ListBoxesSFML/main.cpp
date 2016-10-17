@@ -20,10 +20,10 @@ int main()
         window.draw(shape);
         window.display();
     }
-
-    return 0;
     LinkedList<int> ok;
     ok.insertTail(1);
     ok.insertHead(2);
     ok.printList();
+    return 0;
+
 }
