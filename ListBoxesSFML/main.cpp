@@ -1,5 +1,13 @@
-#include <SFML/Graphics.hpp>
+/*
+Arturo Burela
+A01019906
+
+Program to draw different boxes using SFML and Linked lists.
+
+*/
 #include "LinkedList.h"
+#include "Box.h"
+#include "Viewer.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
@@ -24,6 +32,7 @@ int main()
     ok.insertTail(1);
     ok.insertHead(2);
     ok.printList();
+    Box ok1(1,2,3,4);
     return 0;
 
 }
