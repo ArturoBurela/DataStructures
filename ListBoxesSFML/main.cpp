@@ -5,8 +5,6 @@ A01019906
 Program to draw different boxes using SFML and Linked lists.
 
 */
-#include "LinkedList.h"
-#include "Box.h"
 #include "Viewer.h"
 
 
@@ -15,11 +13,10 @@ void menu()
     char option = 'a';
     while (option != 'q')
     {
-        std::cout << "\nUSER MENU\n";
-        std::cout << "\ta. Say Hello\n";
-        std::cout << "\tb. Say Goodbye\n";
+        std::cout << "\nChoose an option\n";
+        std::cout << "\ta. Add a Box (random)\n";
+        std::cout << "\tb. Remove last Box\n";
         std::cout << "\tq. Quit program\n";
-        std::cout << "Choose an option: ";
         std::cin >> option;
 
         switch(option)
@@ -33,7 +30,7 @@ void menu()
                 std::cout << "B selected: " << std::endl;
                 break;
             case 'q':
-                std::cout << "Finishing program" << std::endl;
+                std::cout << "Goodbye!" << std::endl;
                 exit(0);
                 break;
             default:
@@ -44,29 +41,20 @@ void menu()
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-                //window.setSize(sf::Vector2u(640, 480));
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-    LinkedList<int> ok;
-    ok.insertTail(1);
-    ok.insertHead(2);
-    ok.printList();
+    LinkedList<Box> ok;
+    //ok.insertTail(1);
+    //ok.insertHead(2);
+    //ok.printList();
     Box ok1(1,2,3,4);
+    Box ok3(1,2,3,4);
+    Box ok2(1,2,3,4);
+    ok.insertHead(ok1);
+    ok.insertHead(ok3);
+    ok.insertHead(ok2);
+    ok.insertHead(ok1);
+    //menu();
+    Viewer test("Viewer test", &menu);
+    test.windowListener();
     return 0;
 
 }

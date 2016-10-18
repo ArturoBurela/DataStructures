@@ -9,6 +9,8 @@ Modified viewer class used to draw while using the terminal
 #define  VIEW_H
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "LinkedList.h"
+#include "Box.h"
 
 class Viewer {
     private:
@@ -26,9 +28,19 @@ class Viewer {
         sf::Clock clock;
         sf::Time elapsed_time;
         sf::Time total_time;
+        // Additional variables
+        std::string greeting;
+        float scale_factor = 0.5;
+        //char option = 'a';
+        float x_pos = 100;
+        float y_pos = 300;
+        int direction = 1;
+        float speed = 30;
+
+        
 
     public:
-        Viewer (std::string window_title, std::string font_name, void (*menu)(std::string *));
+        Viewer (std::string window_title, void (*menu)());
         //Viewer (std::string window_name, std::string font_name);
 
         // Draw methods

@@ -8,7 +8,7 @@ CXXFLAGS = -std=c++11 -g
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # List of the objects to compile
-OBJECTS = main.o #APP.o
+OBJECTS = main.o Viewer.o
 
 # Variables with rule names
 APP = listbox

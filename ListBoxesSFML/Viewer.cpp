@@ -2,55 +2,25 @@
 Arturo Burela
 A01019906
 
-Modified viewer class used to draw while using the terminal
+Modified viewer class used to draw Boxes stored in a LinkedList while using the terminal
 */
 #include "Viewer.h"
 #include <iostream>
 #include <string>
 
-Viewer::Viewer(std::string window_title, std::string font_name, void (*menu)(std::string *)) : window(sf::VideoMode(800, 600), window_title), menu_thread(menu, &greeting)
+Viewer::Viewer(std::string window_title, void (*menu)()) : window(sf::VideoMode(800, 600), window_title), menu_thread(menu)
 {
     // change the position of the window (relatively to the desktop)
     window.setPosition(sf::Vector2i(700, 100));
 
-    // Load the font
-    font.loadFromFile(font_name);
-
     // Prepare all the drawable elements
     configure();
 
-    greeting = "Nothing yet";
+    //greeting = "Nothing yet";
 }
 
 void Viewer::configure()
 {
-  /*
-    // Configure the title object
-    title.setFont(font);
-    title.setCharacterSize(24);
-    title.setColor(sf::Color::Blue);
-    title.setPosition(sf::Vector2f(20, 10));
-
-    // Configure the info object
-    info.setFont(font);
-    info.setCharacterSize(24);
-    info.setColor(sf::Color::Green);
-    info.setPosition(sf::Vector2f(20, 50));
-
-    // Configure greeting text
-    message.setFont(font);
-    message.setCharacterSize(30);
-    message.setColor(sf::Color::Red);
-    message.setPosition(sf::Vector2f(100, 500));
-
-    // Create a circle with a visible edge
-    circle.setRadius(100);
-    circle.setPointCount(32);
-    circle.setFillColor(sf::Color::Red);
-    circle.setOutlineThickness(20.f);
-    circle.setOutlineColor(sf::Color::Black);
-    circle.setOrigin(circle.getRadius(), circle.getRadius());
-    */
 }
 
 void Viewer::windowListener()
@@ -65,7 +35,7 @@ void Viewer::windowListener()
             {
                 case sf::Event::Closed:
                     window.close();
-                    std::cout << "Saliendo..." << std::endl;
+                    std::cout << "Goodbye..." << std::endl;
                     exit(0);
                     break;
             }
@@ -91,21 +61,9 @@ void Viewer::mainDraw()
     window.display();
 }
 
-void Viewer::drawTitle()
-{
-    // Change the text displayed
-    title.setString("Time elapsed: " + std::to_string(total_time.asSeconds()));
-    info.setString("Speed: " + std::to_string(speed) + "\nRadius: " + std::to_string(circle.getRadius()));
-    message.setString(greeting);
-
-    window.draw(title);
-    window.draw(info);
-    window.draw(message);
-}
-
 void Viewer::drawAnimatedCircle()
 {
-    // Create a moving animation
+    /*// Create a moving animation
     circle.setPosition(sf::Vector2f(x_pos, y_pos));
     x_pos += speed * direction * elapsed_time.asSeconds();
     if (x_pos <= circle.getRadius() || x_pos >= window.getSize().x-circle.getRadius())
@@ -113,5 +71,9 @@ void Viewer::drawAnimatedCircle()
         direction = direction * -1;
     }
 
-    window.draw(circle);
+    //window.draw(circle);
+    */
+    sf::RectangleShape rec(sf::Vector2f(100, 100));
+    rec.setFillColor(sf::Color::Red);
+    window.draw(rec);
 }
