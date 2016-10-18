@@ -12,6 +12,7 @@ void menu(LinkedList<Box> *boxes)
 {
   //Char and while only to display the option
   char option = 'a';
+  Box perro(0,0,100,100);
   while (option != 'q')
   {
     std::cout << "\nChoose an option\n";
@@ -25,7 +26,8 @@ void menu(LinkedList<Box> *boxes)
       case 'a':
       //If a is selected we insertTail a new box because the tail is the last readed box so its drawed last and in fron of the others
       std::cout << "New box created: " << std::endl;
-      boxes->insertTail(Box(1,2,3,4));
+      //USE A NON POINTER LINKED LIST OR IT WILL CRASH
+      boxes->insertHead(perro);
       break;
       case 'b':
       //If b is selected we simply remove the tail of the list
@@ -46,9 +48,9 @@ void menu(LinkedList<Box> *boxes)
 int main()
 {
   //Create an instance of "Viewer" the Window title and the menu function are passed as parameters
-  Viewer test("LinkedList of Boxes", &menu);
+  Viewer window("LinkedList of Boxes", &menu);
   //Start the Viewer Listener
-  test.windowListener();
+  window.windowListener();
   //Return 0 to avoid compiler problems
   return 0;
 }

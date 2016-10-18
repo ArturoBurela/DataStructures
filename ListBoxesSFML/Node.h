@@ -5,12 +5,10 @@ Arturo Burela
 A01019906
 
 */
-
 #ifndef NODE_H
 #define NODE_H
 
 #include <iostream>
-#include <stdexcept>
 
 template <class T>
 class Node {
@@ -22,7 +20,7 @@ public:
   Node() {}
   Node(T _data) { data = _data; }
   // Destructor
-  ~Node() { next = nullptr;}
+  ~Node() { next = nullptr; }
   // Access methods
   void setData(T _data) { data = _data; }
   void setNext(Node * _next) { next = _next; }

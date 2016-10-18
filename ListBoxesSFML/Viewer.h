@@ -20,25 +20,13 @@ public:
   sf::Text title;
   sf::Text info;
   sf::Text message;
-  sf::CircleShape circle;
+  //Used to track if the user closed the window
   sf::Event event;
-  // Thread object
+  // Thread object, used to run the menu function while displaying the window
   sf::Thread menu_thread;
-  // Time variables
-  sf::Clock clock;
-  sf::Time elapsed_time;
-  sf::Time total_time;
   // Additional variables
-  std::string greeting;
-  float scale_factor = 0.5;
-  //char option = 'a';
-  float x_pos = 100;
-  float y_pos = 300;
-  int direction = 1;
-  float speed = 30;
-  
   LinkedList<Box> *boxes;
-  bool draw = false;
+  int *geometry;
 
 public:
   //The constructor passing the window title, the function menu() and its parameters
@@ -47,9 +35,6 @@ public:
   void configure();
   void windowListener();
   void mainDraw();
-  void drawTitle();
-  void drawAnimatedCircle();
-
-  //void menu();
+  void drawBoxes();
 };
 #endif

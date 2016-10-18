@@ -5,9 +5,9 @@ Arturo Burela A01019906
 Data Structures
 
 */
-
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
+
 #include <stdexcept>
 #include "Node.h"
 
@@ -15,7 +15,7 @@ template <class T>
 class LinkedList {
 private:
   Node<T> * head = nullptr;
-  int length = 0;
+  //int length = 0;
 public:
   // Constructors
   LinkedList () {}
@@ -30,8 +30,6 @@ public:
   void insertTail (Node<T> * new_node);
   void insertAtPosition (T data, int position);
   void insertAtPosition (Node<T> * new_node, int position);
-  //Lenght method
-  int getLength() const;
   // Delete methods
   T deleteHead ();    // Return the data and deletes the node
   Node<T> * removeHead ();    // Return the node with the data
@@ -41,8 +39,11 @@ public:
   // Search methods
   T getDataAtHead ();
   T getDataAtTail ();
-  T getDataAtPosition (int position) const;
-
+  T getDataAtPosition (int position);
+  // Access methods
+  int getLength();
+  Node<T> * getHead () const { return head; }
+  Node<T> * getHead () { return head; }
   // Print methods
   void printList ();
 };
@@ -66,7 +67,6 @@ void LinkedList<T>::clear()
     delete item;
     item = head;
   }
-  length = 0;
 }
 
 ////// INSERTION METHODS //////
@@ -84,7 +84,6 @@ void LinkedList<T>::insertHead (Node<T> * new_node)
 {
   new_node->setNext(head);
   head = new_node;
-  length += 1;
 }
 
 template <class T>
@@ -111,92 +110,6 @@ void LinkedList<T>::insertTail (Node<T> * new_node)
       item = item->getNext();
     }
     item->setNext(new_node);
-    length += 1;
-  }
-}
-
-template <class T>
-void LinkedList<T>::insertAtPosition (Node<T> * new_node, int position){
-  if(position<=length-1){
-    if(position==0){
-      insertHead(new_node);
-    }else{
-      Node<T> * item = head;
-      int i = 0;
-      //Loop until the position
-      while (i<position-1) {
-        item = item->getNext();
-        i++;
-      }
-      //std::cout << "Prueba" << std::endl;//Prueba
-      //Set the new links
-      new_node->setNext(item->getNext());
-      item->setNext(new_node);
-      length += 1;
-      //new_node.setNext();
-    }
-  }else{
-    std::cout << "position not valid" << std::endl;
-    return;
-  }
-}
-template <class T>
-void LinkedList<T>::insertAtPosition (T data, int position){
-  if(position<=length-1){
-    // Create a new node instance with the data provided
-    Node<T> * new_node = new Node<T>(data);
-    insertAtPosition(new_node,position);
-  }else{
-    std::cout << "position not valid" << std::endl;
-    return;
-  }
-}
-
-////GET METHODS //////
-template <class T>
-T LinkedList<T>::getDataAtHead(){
-  if(length>0){
-    //Return the head data;
-    return head->getData();
-  }else{
-    //std::cout << "No head in the list" << std::endl;
-    //throw(-1); // Does not work with strings, What to return for every T ???
-    throw std::runtime_error("Error: Empty list");
-  }
-}
-template <class T>
-T LinkedList<T>::getDataAtTail(){
-  if(length>0){
-    Node<T> * item = head;
-    //Loop until the end of the list
-    while (item->getNext() != nullptr) {
-      item = item->getNext();
-    }
-    //Return the tail data
-    return item->getData();
-  }else{
-    //std::cout << "No tail in the list" << std::endl;
-    //throw(-1); // Does not work with strings, What to return for every T ???
-    throw std::runtime_error("Error :Empty list");
-  }
-}
-template<class T>
-T LinkedList<T>::getDataAtPosition(int position) const{
-  if(length>0){
-    Node<T> * item = head;
-    //Create varible in order to keep te position int
-    int i = 0;
-    //Loop until the position
-    while (i!=position) {
-      item = item->getNext();
-      i++;
-    }
-    //Return the data
-    return item->getData();
-  }else{
-    //std::cout << "No tail in the list" << std::endl;
-    //throw(-1); // Does not work with strings, What to return for every T ???
-    throw std::runtime_error("Error: Empty list");
   }
 }
 
@@ -267,8 +180,63 @@ Node<T> * LinkedList<T>::removeFromPosition (int position)
 {
 
 }
+
+// Search methods
 template <class T>
-int LinkedList<T>::getLength() const{
+T LinkedList<T>::getDataAtHead ()
+{
+  if (head != nullptr)
+  return head->getData();
+  else
+  throw std::runtime_error("Error: Empty list");
+}
+
+template <class T>
+T LinkedList<T>::getDataAtTail ()
+{
+  if (head != nullptr)
+  {
+    Node<T> * item = head;
+    while (item->getNext() != nullptr)
+    {
+      item = item->getNext();
+    }
+    return item->getData();
+  }
+  else
+  throw std::runtime_error("Error: Empty list");
+}
+
+template <class T>
+T LinkedList<T>::getDataAtPosition (int position)
+{
+  if (head != nullptr)
+  {
+    Node<T> * item = head;
+    int index = 0;
+    while (index < position && item->getNext() != nullptr)
+    {
+      item = item->getNext();
+      index++;
+    }
+    return item->getData();
+  }
+  else
+  throw std::runtime_error("Error: Empty list");
+}
+
+// Access methods
+template <class T>
+int LinkedList<T>::getLength()
+{
+  int length = 0;
+
+  Node<T> * item = head;
+  while (item != nullptr)
+  {
+    length++;
+    item = item->getNext();
+  }
   return length;
 }
 
