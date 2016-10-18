@@ -11,6 +11,8 @@ You should create a Box class, that holds the details for a single rectangle, st
 #define BOX
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 class Box {
 private:
   int x;
@@ -20,12 +22,21 @@ private:
   sf::Color color;
 public:
   // Constructors
-  Box() {}
+  Box() {
+    srand(time(NULL));
+    width = rand() % 500 + 50;
+    height = rand() % 500 + 50;
+    x = rand() % 600;
+    y = rand() % 600;
+    color = rand_color();
+  }
   Box(int x, int y, int w, int h) {
+    srand(time(NULL));
     this->x = x;
     this->y = y;
     width = w;
     height = h;
+    color = rand_color();
   }
   // Destructor
   ~Box() {}
@@ -34,5 +45,8 @@ public:
   int getY(){return y;}
   int getWidth(){return width;}
   int getHeight(){return height;}
+  sf::Color getColor(){return color;}
+  //Aux color random
+  sf::Color rand_color(){return sf::Color(std::rand() % 255, std::rand() % 255, std::rand() % 255);}
 };
 #endif

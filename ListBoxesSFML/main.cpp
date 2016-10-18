@@ -8,7 +8,7 @@ Program to draw different boxes using SFML and Linked lists.
 #include "Viewer.h"
 
 //Menu function, has a pointer to a LinkedList of Boxes passed as an argument
-void menu(LinkedList<Box> *boxes)
+void menu(int *numboxes)
 {
   //Char and while only to display the option
   char option = 'a';
@@ -26,12 +26,14 @@ void menu(LinkedList<Box> *boxes)
       case 'a':
       //If a is selected we insertTail a new box because the tail is the last readed box so its drawed last and in fron of the others
       std::cout << "New box created: " << std::endl;
+      //*op = 1;
       //USE A NON POINTER LINKED LIST OR IT WILL CRASH
-      boxes->insertHead(perro);
+      *numboxes = 1;
       break;
       case 'b':
       //If b is selected we simply remove the tail of the list
       std::cout << "Last box removed: " << std::endl;
+      *numboxes = -1;
       break;
       case 'q':
       //Exit the program

@@ -25,16 +25,17 @@ public:
   // Thread object, used to run the menu function while displaying the window
   sf::Thread menu_thread;
   // Additional variables
-  LinkedList<Box> *boxes;
-  int *geometry;
+  LinkedList<Box> boxes;
+  int numboxes;
 
 public:
   //The constructor passing the window title, the function menu() and its parameters
-  Viewer (std::string window_title, void (*menu)(LinkedList<Box> *boxes));
+  Viewer (std::string window_title, void (*menu)(int * numboxes));
   // Draw methods
   void configure();
   void windowListener();
   void mainDraw();
   void drawBoxes();
+  void addRemoveBox();
 };
 #endif
