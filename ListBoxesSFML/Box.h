@@ -22,7 +22,7 @@ private:
   sf::Color color;
 public:
   // Constructors
-  Box() {
+  Box() { //Empty constructor set random values
     srand(time(NULL));
     width = rand() % 500 + 50;
     height = rand() % 500 + 50;
@@ -30,7 +30,7 @@ public:
     y = rand() % 600;
     color = rand_color();
   }
-  Box(int x, int y, int w, int h) {
+  Box(int x, int y, int w, int h) { //Custom constructor only set random color
     srand(time(NULL));
     this->x = x;
     this->y = y;

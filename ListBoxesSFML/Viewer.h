@@ -31,10 +31,12 @@ public:
   //The constructor passing the window title, the function menu() and its parameters
   Viewer (std::string window_title, void (*menu)(Box * aux));
   // Draw methods
-  void configure();
   void windowListener();
+  //Main Windows Drawer
   void mainDraw();
+  //Draw the boxes of the list
   void drawBoxes();
+  //Check for new or removed boxes
   void addRemoveBox();
 };
 #endif

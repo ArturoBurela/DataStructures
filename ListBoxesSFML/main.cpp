@@ -34,7 +34,7 @@ void menu(Box *aux)
       aux->setX(1);
       break;
       case 'b':
-      //If a is selected we insertTail a new box because the tail is the last readed box so its drawed last and in fron of the others
+      //If b is selected then enter the data to the box
       std::cout << "New box created: " << std::endl;
       std::cout << "Please enter the data:" << std::endl;
       std::cout << "X position: " << std::endl;
@@ -51,12 +51,12 @@ void menu(Box *aux)
       aux->setHeight(n);
       break;
       case 'c':
-      //If b is selected we simply remove the tail of the list
+      //If b is selected we set flag to remove tail
       std::cout << "Last box removed: " << std::endl;
       aux->setX(-1);
       break;
       case 'd':
-      //If b is selected we simply remove the tail of the list
+      //If b is selected we set flag to clear list
       std::cout << "All clear!" << std::endl;
       aux->setX(-2);
       break;
