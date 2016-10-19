@@ -16,21 +16,20 @@ class Viewer {
 public:
   // Drawable elements
   sf::RenderWindow window;
-  sf::Font font;
-  sf::Text title;
-  sf::Text info;
-  sf::Text message;
   //Used to track if the user closed the window
   sf::Event event;
   // Thread object, used to run the menu function while displaying the window
   sf::Thread menu_thread;
-  // Additional variables
+  // List to store the boxes
   LinkedList<Box> boxes;
-  int numboxes;
+  //A rectangle to draw the boxes
+  sf::RectangleShape rec;
+  //Flag to now if a new box must be added or an existing box must be removed
+  Box aux;
 
 public:
   //The constructor passing the window title, the function menu() and its parameters
-  Viewer (std::string window_title, void (*menu)(int * numboxes));
+  Viewer (std::string window_title, void (*menu)(Box * aux));
   // Draw methods
   void configure();
   void windowListener();

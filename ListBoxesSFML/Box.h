@@ -17,8 +17,8 @@ class Box {
 private:
   int x;
   int y;
-  int width;
-  int height;
+  unsigned int width;
+  unsigned int height;
   sf::Color color;
 public:
   // Constructors
@@ -45,7 +45,12 @@ public:
   int getY(){return y;}
   int getWidth(){return width;}
   int getHeight(){return height;}
+  void setX(int n){x = n;}
+  void setY(int n){y = n;}
+  void setWidth(int n){width = n;}
+  void setHeight(int n){height = n;}
   sf::Color getColor(){return color;}
+  void setColor(sf::Color c){color = c;}
   //Aux color random
   sf::Color rand_color(){return sf::Color(std::rand() % 255, std::rand() % 255, std::rand() % 255);}
 };

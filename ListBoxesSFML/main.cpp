@@ -8,16 +8,19 @@ Program to draw different boxes using SFML and Linked lists.
 #include "Viewer.h"
 
 //Menu function, has a pointer to a LinkedList of Boxes passed as an argument
-void menu(int *numboxes)
+void menu(Box *aux)
 {
   //Char and while only to display the option
   char option = 'a';
-  Box perro(0,0,100,100);
+  int n;
+  std::cout << "/* Welcome! Let's draw boxes! */" << std::endl;
   while (option != 'q')
   {
     std::cout << "\nChoose an option\n";
     std::cout << "\ta. Add a Box (random)\n";
-    std::cout << "\tb. Remove last Box\n";
+    std::cout << "\tb. Add a Box (custom)\n";
+    std::cout << "\tc. Remove last Box\n";
+    std::cout << "\td. Clear all\n";
     std::cout << "\tq. Quit program\n";
     std::cin >> option;
     //Execute any valid selected option
@@ -28,12 +31,34 @@ void menu(int *numboxes)
       std::cout << "New box created: " << std::endl;
       //*op = 1;
       //USE A NON POINTER LINKED LIST OR IT WILL CRASH
-      *numboxes = 1;
+      aux->setX(1);
       break;
       case 'b':
+      //If a is selected we insertTail a new box because the tail is the last readed box so its drawed last and in fron of the others
+      std::cout << "New box created: " << std::endl;
+      std::cout << "Please enter the data:" << std::endl;
+      std::cout << "X position: " << std::endl;
+      std::cin >> n;
+      aux->setX(n);
+      std::cout << "Y position: " << std::endl;
+      std::cin >> n;
+      aux->setY(n);
+      std::cout << "width: " << std::endl;
+      std::cin >> n;
+      aux->setWidth(n);
+      std::cout << "height: " << std::endl;
+      std::cin >> n;
+      aux->setHeight(n);
+      break;
+      case 'c':
       //If b is selected we simply remove the tail of the list
       std::cout << "Last box removed: " << std::endl;
-      *numboxes = -1;
+      aux->setX(-1);
+      break;
+      case 'd':
+      //If b is selected we simply remove the tail of the list
+      std::cout << "All clear!" << std::endl;
+      aux->setX(-2);
       break;
       case 'q':
       //Exit the program
