@@ -15,17 +15,17 @@ void treeMenu()
 {
     BinarySearchTree<char> charTree;
 
-    charTree.insert('g');
-    charTree.insert('j');
-    charTree.insert('T');
-    charTree.insert('3');
-    charTree.insert('y');
-    charTree.insert('n');
-    charTree.insert('B');
-    charTree.insert('8');
-    charTree.insert('a');
-    charTree.insert('b');
-    charTree.insert('o');
+    charTree.insert('9');
+    charTree.insert('-');
+    charTree.insert('5');
+    charTree.insert('+');
+    charTree.insert('2');
+    charTree.insert('^');
+    charTree.insert('4');
+    charTree.insert('*');
+    charTree.insert('2');
+    charTree.insert('+');
+    charTree.insert('9');
 
     charTree.printInOrder();
     std::cout << std::endl;

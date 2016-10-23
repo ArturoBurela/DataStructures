@@ -10,8 +10,11 @@ A01019906
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <cstring>
 #include "Stack.h"
 #include "BinarySearchTree.h"
+
+using namespace std;
 
 class Postfix {
     private:
@@ -32,6 +35,20 @@ class Postfix {
         void postfixTree();
         int recursiveTreeEvaluate();
 };
+
+void Postfix::postfixTree(){
+  convertToPostfix();
+  int i = postfix.length();
+  char digits[i];
+  strcpy(digits,postfix.c_str());
+  std::cout << digits << std::endl;
+  for (int j = i; j <= i && j>0; j--) {
+    std::cout << "Digits value: " << digits[j-1]  << std::endl;
+    expression.insertPostFix(digits[j-1]);
+  }
+  expression.printInOrder();
+  expression.printTree();
+}
 
 
 int Postfix::computeOperator(int num1, int num2, char sign)

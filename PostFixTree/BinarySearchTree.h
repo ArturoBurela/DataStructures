@@ -22,6 +22,8 @@ class BinarySearchTree {
         // Recursive methods, that take the root of the subtree
         void clear(TreeNode<T> * _root);
         void insert(TreeNode<T> * _root, TreeNode<T> * new_node);
+        // Special method to insert with difference restrictions
+        void insertPostFix(TreeNode<T> * _root, TreeNode<T> * new_node);
         void printInOrder(TreeNode<T> * _root);
         void printTree(TreeNode<T> * _root, int indent, char icon);
 
@@ -34,6 +36,9 @@ class BinarySearchTree {
         void setRoot(TreeNode<T> * _root) { root = _root; }
         void insert(T data);
         void insert(TreeNode<T> * new_node);
+        //Added special insert methods to store postfix without binary search restrictions
+        void insertPostFix(T data);
+        void insertPostFix(TreeNode<T> * new_node);
         void printInOrder() { printInOrder(root); }
         void printTree() { printTree(root, INCREMENT, '-'); }
         void printPostOrder();
@@ -76,6 +81,25 @@ void BinarySearchTree<T>::insert(TreeNode<T> * new_node)
         insert(root, new_node);
 }
 
+// Public insertion method that inserts Postfix
+template <class T>
+void BinarySearchTree<T>::insertPostFix(T data)
+{
+    TreeNode<T> * new_node = new TreeNode<T>(data);
+    insertPostFix(new_node);
+}
+
+// Public insertion method that that inserts Postfix
+template <class T>
+void BinarySearchTree<T>::insertPostFix(TreeNode<T> * new_node)
+{
+    // Empty tree
+    if (root == nullptr)
+        root = new_node;
+    else
+        insertPostFix(root, new_node);
+}
+
 // Private insertion method that gets the root of the subtree
 //  to insert, and the new tree node
 template <class T>
@@ -97,6 +121,25 @@ void BinarySearchTree<T>::insert(TreeNode<T> * _root, TreeNode<T> * new_node)
     }
     else
         return; // Do not insert duplicated data
+}
+
+// Private insertion method that gets the root of the subtree, it inserts according to postfix rules
+template <class T>
+void BinarySearchTree<T>::insertPostFix(TreeNode<T> * _root, TreeNode<T> * new_node)
+{
+  if (_root->getRight() == nullptr) {
+    _root->setRight(new_node);
+  }
+  else if (_root->getLeft() == nullptr) {
+    _root->setLeft(new_node);
+  }
+  else {
+    if((_root->getRight()->getData()=='*'||_root->getRight()->getData()=='-'||_root->getRight()->getData()=='+'||_root->getRight()->getData()=='^') && (new_node->getData()=='^' || new_node->getData()=='*' ||new_node->getData()=='-'||new_node->getData()=='+')) {
+      insertPostFix(_root->getRight(),new_node);
+    }else{
+      insertPostFix(_root->getLeft(),new_node);
+    }
+  }
 }
 
 template <class T>

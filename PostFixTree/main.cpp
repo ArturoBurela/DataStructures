@@ -1,33 +1,21 @@
+/*
+Arturo Burela A01019906
+
+Program that creates Postfix Trees and Evaluates them
+
+*/
+
 #include <iostream>
-#include "BinarySearchTree.h"
-
-void treeMenu();
-
+#include "Postfix.h"
 int main()
 {
-    std::cout << "BINARY SEARCH TREE TEST" << std::endl;
-    treeMenu();
+  Postfix expression;
+  expression.setInfix("9-3*2^2+5");
 
-    return 0;
-}
+  expression.postfixTree();
+  std::cout << "Infix: 9-3*2^2+5" << std::endl;
 
-void treeMenu()
-{
-    BinarySearchTree<char> charTree;
-
-    charTree.insert('g');
-    charTree.insert('j');
-    charTree.insert('T');
-    charTree.insert('3');
-    charTree.insert('y');
-    charTree.insert('n');
-    charTree.insert('B');
-    charTree.insert('8');
-    charTree.insert('a');
-    charTree.insert('b');
-    charTree.insert('o');
-
-    charTree.printInOrder();
-    std::cout << std::endl;
-    charTree.printTree();
+  expression.convertToPostfix();
+  std::cout << "Postfix: " << expression.getPostfix() << std::endl;
+  return 0;
 }
