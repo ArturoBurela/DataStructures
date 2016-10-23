@@ -45,6 +45,7 @@ void Postfix::postfixTree(){
   for (int j = i; j <= i && j>0; j--) {
     std::cout << "Digits value: " << digits[j-1]  << std::endl;
     expression.insertPostFix(digits[j-1]);
+    expression.printTree();
   }
   expression.printInOrder();
   expression.printTree();

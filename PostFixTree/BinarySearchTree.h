@@ -18,7 +18,8 @@ template <class T>
 class BinarySearchTree {
     private:
         TreeNode<T> * root = nullptr;
-
+        //variable to identify if we have reached te endo of the operators
+        bool end = false;
         // Recursive methods, that take the root of the subtree
         void clear(TreeNode<T> * _root);
         void insert(TreeNode<T> * _root, TreeNode<T> * new_node);
@@ -26,6 +27,9 @@ class BinarySearchTree {
         void insertPostFix(TreeNode<T> * _root, TreeNode<T> * new_node);
         void printInOrder(TreeNode<T> * _root);
         void printTree(TreeNode<T> * _root, int indent, char icon);
+        //Methods to classify chars in numbers and operators
+        bool isOp(char c);
+        bool isNum(char c);
 
     public:
         BinarySearchTree () {}
@@ -127,18 +131,94 @@ void BinarySearchTree<T>::insert(TreeNode<T> * _root, TreeNode<T> * new_node)
 template <class T>
 void BinarySearchTree<T>::insertPostFix(TreeNode<T> * _root, TreeNode<T> * new_node)
 {
-  if (_root->getRight() == nullptr) {
-    _root->setRight(new_node);
-  }
-  else if (_root->getLeft() == nullptr) {
-    _root->setLeft(new_node);
-  }
-  else {
-    if((_root->getRight()->getData()=='*'||_root->getRight()->getData()=='-'||_root->getRight()->getData()=='+'||_root->getRight()->getData()=='^') && (new_node->getData()=='^' || new_node->getData()=='*' ||new_node->getData()=='-'||new_node->getData()=='+')) {
-      insertPostFix(_root->getRight(),new_node);
+  /*if (isNum(new_node->getData())) {
+    if (end) {
+      if (_root->getRight()->getRight()==nullptr || _root->getRight()->getLeft()==nullptr) {
+        insertPostFix(_root->getRight(),new_node);
+      }else{
+        _root->setLeft(new_node);
+      }
     }else{
-      insertPostFix(_root->getLeft(),new_node);
+      if (_root->getRight()!=nullptr && isOp(_root->getRight()->getData())&&!end) {
+        insertPostFix(_root->getRight(),new_node);
+      }else if(_root->getLeft()==nullptr){
+        _root->setLeft(new_node);
+      }else if(_root->getRight()==nullptr){
+        _root->setRight(new_node);
+        end = true;
+      }
+      if (_root->getLeft()!=nullptr && isOp(_root->getLeft()->getData())&&!end) {
+        insertPostFix(_root->getLeft(),new_node);
+      }else if(_root->getLeft()==nullptr){
+        _root->setLeft(new_node);
+      }else if(_root->getRight()==nullptr){
+        _root->setRight(new_node);
+        end = true;
+      }
     }
+    */
+
+
+    /*if (_root->getLeft()==nullptr && isOp(_root->getData()) && (_root->getRight()==nullptr || isNum(_root->getRight()->getData()))) {
+      _root->setLeft(new_node);
+      return;
+    }
+    if (_root->getRight()==nullptr && isOp(_root->getData())) {
+      _root->setRight(new_node);
+      return;
+    }else{
+      insertPostFix(_root->getRight(),new_node);
+    }*/
+    if (isNum(new_node->getData())) {
+      if (_root->getRight()==nullptr && isOp(_root->getData())) {
+        _root->setRight(new_node);
+      }else if (_root->getLeft()==nullptr && isOp(_root->getData())) {
+        _root->setLeft(new_node);
+      }else{
+        if (isOp(_root->getRight()->getData())) {
+          insertPostFix(_root->getRight(),new_node);
+        }
+        std::cout << "Root Data: "<< _root->getData() << std::endl;
+        if (isOp(_root->getLeft()->getData())) {
+          insertPostFix(_root->getLeft(),new_node);
+        }
+      }
+    }
+
+  if (isOp(new_node->getData())) {
+    end = false;
+    if (_root->getRight()==nullptr && isOp(_root->getData())) {
+      _root->setRight(new_node);
+    }else if (_root->getLeft()==nullptr && isOp(_root->getData())) {
+      _root->setLeft(new_node);
+    }else{
+      if (isOp(_root->getRight()->getData())) {
+        std::cout << "Root Data: "<< _root->getData() << std::endl;
+        insertPostFix(_root->getRight(),new_node);
+      }
+      if (isOp(_root->getLeft()->getData())) {
+        insertPostFix(_root->getLeft(),new_node);
+      }
+    }
+  }
+}
+
+//Methods to classify chars in numbers and operators
+template <class T>
+bool BinarySearchTree<T>::isOp(char c){
+  if (c=='+'||c=='*'||c=='^'||c=='-') {
+    return true;
+  }else{
+    return false;
+  }
+}
+
+template <class T>
+bool BinarySearchTree<T>::isNum(char c){
+  if (c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9'||c=='0') {
+    return true;
+  }else{
+    return false;
   }
 }
 
