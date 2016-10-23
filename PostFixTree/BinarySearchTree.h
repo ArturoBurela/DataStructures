@@ -2,7 +2,7 @@
 Arturo Burela
 A01019906
 
-Template class for a binary search tree
+Template class for a binary search tree, adapted to print in PostOrder
 */
 
 #ifndef BINARY_SEARCH_TREE_H
@@ -36,6 +36,7 @@ class BinarySearchTree {
         void insert(TreeNode<T> * new_node);
         void printInOrder() { printInOrder(root); }
         void printTree() { printTree(root, INCREMENT, '-'); }
+        void printPostOrder();
 };
 
 // Public method to delete all the nodes in the tree

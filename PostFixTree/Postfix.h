@@ -11,11 +11,14 @@ A01019906
 #include <cmath>
 #include <string>
 #include "Stack.h"
+#include "BinarySearchTree.h"
 
 class Postfix {
     private:
         std::string infix;
         std::string postfix;
+        //Added the BinaryTree variable
+        BinarySearchTree<char> expression;
 
         int computeOperator(int num1, int num2, char sign);
         int comparePrecedence(char op1, char op2);
@@ -26,6 +29,8 @@ class Postfix {
         void convertToPostfix();
         int evaluate();
         std::string getPostfix() { return postfix; }
+        void postfixTree();
+        int recursiveTreeEvaluate();
 };
 
 

@@ -1,9 +1,6 @@
 /*
+Arturo Burela A01019906
 Node Class for use in Linked Lists and similar structures
-
-Gilberto Echeverria
-gilecheverria@yahoo.com
-14/09/2016
 */
 
 #ifndef NODE_H

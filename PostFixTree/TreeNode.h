@@ -1,3 +1,8 @@
+/*
+Arturo Burela A01019906
+Tree node class
+*/
+
 #ifndef TREE_NODE
 #define TREE_NODE
 
