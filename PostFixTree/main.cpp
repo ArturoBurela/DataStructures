@@ -10,7 +10,7 @@ Program that creates Postfix Trees and Evaluates them
 int main()
 {
   Postfix expression;
-  expression.setInfix("5^2+2^2+3");
+  expression.setInfix("9-3*2^2+5+4^2");
 
   expression.postfixTree();
   std::cout << "Infix: 9-3*2^2+5" << std::endl;

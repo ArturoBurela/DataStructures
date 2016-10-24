@@ -46,24 +46,29 @@ void Postfix::postfixTree(){
   strcpy(digits,postfix.c_str());
   std::stack<TreeNode<char>*> treestack;
   TreeNode<char> * treenode = nullptr;
-  for (int j = 0; j < i-1; j++) {
+  for (int j = 0; j < postfix.length(); j++) {
     if (isNum(digits[j])) {
       treenode= new TreeNode<char>(digits[j]);
-      std::cout << "Digits: " << treenode->getData() << std::endl;
+      //std::cout << "Digits: " << treenode->getData() << std::endl;
       treestack.push(treenode);
     }
     if (isOp(digits[j])) {
       //treenode->setData(digits[j]);
       treenode = new TreeNode<char>(digits[j]);
       treenode->setRight(treestack.top());
-      std::cout << "Data in node:" << treenode->getData() << std::endl;
+      //std::cout << "Data in node:" << treenode->getData() << std::endl;
       treestack.pop();
       treenode->setLeft(treestack.top());
-      std::cout << "Data in node:" << treenode->getData() << std::endl;
+      //std::cout << "Data in node:" << treenode->getData() << std::endl;
       treestack.pop();
       treestack.push(treenode);
       expression.setRoot(treenode);
       expression.printTree();
+      std::cout << std::endl;
+      std::cout << std::endl;
+      std::cout << std::endl;
+      std::cout << std::endl;
+      std::cout << std::endl;
       //leaf = node->getData();
       //std::cout << "NODE Data: " << node->getData()->getData() << std::endl;
       //std::cout << "NODE Data: " << node.getData().getData() << std::endl;
@@ -72,6 +77,7 @@ void Postfix::postfixTree(){
       //node = trees.pop();
     }
   }
+  expression.printTree();
 }
 
 
