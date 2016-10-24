@@ -22,7 +22,7 @@ class Postfix {
         std::string infix;
         std::string postfix;
         //Added the BinaryTree variable
-        BinarySearchTree<char> expression;
+        BinarySearchTree<char> treepostfix;
         int computeOperator(int num1, int num2, char sign);
         int comparePrecedence(char op1, char op2);
         //Methods to classify chars in numbers and operators
@@ -40,44 +40,40 @@ class Postfix {
 };
 
 void Postfix::postfixTree(){
+  //Make sure the infix is converted to a Postfix string
   convertToPostfix();
-  int i = postfix.length();
-  char digits[i];
-  strcpy(digits,postfix.c_str());
+  //Create a stack to hold tree nodes
   std::stack<TreeNode<char>*> treestack;
+  //Create a new treenode pointer
   TreeNode<char> * treenode = nullptr;
+  //Make a loop to go over the string
   for (int j = 0; j < postfix.length(); j++) {
-    if (isNum(digits[j])) {
-      treenode= new TreeNode<char>(digits[j]);
-      //std::cout << "Digits: " << treenode->getData() << std::endl;
+    //Check if the character is a number
+    if (isNum(postfix.at(j))) {
+      //Create a new treenode<char> with data of the number
+      treenode= new TreeNode<char>(postfix.at(j));
+      //Push the treenode to the stack
       treestack.push(treenode);
     }
-    if (isOp(digits[j])) {
-      //treenode->setData(digits[j]);
-      treenode = new TreeNode<char>(digits[j]);
+    if (isOp(postfix.at(j))) {//Check if is is a valid operator
+      //Create a new treenode with the operator as data
+      treenode = new TreeNode<char>(postfix.at(j));
+      //Get the top node and set as the right
       treenode->setRight(treestack.top());
-      //std::cout << "Data in node:" << treenode->getData() << std::endl;
+      //erase the element from stack
       treestack.pop();
+      //Get the next stack node and set as the left
       treenode->setLeft(treestack.top());
-      //std::cout << "Data in node:" << treenode->getData() << std::endl;
+      //erase the element from stack
       treestack.pop();
+      //Push the new node that now has pointers to left and right
       treestack.push(treenode);
-      expression.setRoot(treenode);
-      expression.printTree();
-      std::cout << std::endl;
-      std::cout << std::endl;
-      std::cout << std::endl;
-      std::cout << std::endl;
-      std::cout << std::endl;
-      //leaf = node->getData();
-      //std::cout << "NODE Data: " << node->getData()->getData() << std::endl;
-      //std::cout << "NODE Data: " << node.getData().getData() << std::endl;
-      //leaf = node->getData();
-      //treenode->setLeft(leaf);
-      //node = trees.pop();
     }
   }
-  expression.printTree();
+  //Set the root of the tree to the las pointer
+  treepostfix.setRoot(treenode);
+  //Print the tree
+  treepostfix.printTree();
 }
 
 
