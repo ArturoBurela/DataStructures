@@ -11,6 +11,7 @@ A01019906
 #include <cmath>
 #include <string>
 #include <cstring>
+#include <stack>
 #include "Stack.h"
 #include "BinarySearchTree.h"
 
@@ -22,17 +23,19 @@ class Postfix {
         std::string postfix;
         //Added the BinaryTree variable
         BinarySearchTree<char> expression;
-
         int computeOperator(int num1, int num2, char sign);
         int comparePrecedence(char op1, char op2);
+        //Methods to classify chars in numbers and operators
+        bool isOp(char c);
+        bool isNum(char c);
     public:
         Postfix () {}
         Postfix (std::string _infix) { infix = _infix; }
         void setInfix (std::string _infix) { infix = _infix; }
         void convertToPostfix();
+        void postfixTree();
         int evaluate();
         std::string getPostfix() { return postfix; }
-        void postfixTree();
         int recursiveTreeEvaluate();
 };
 
@@ -41,16 +44,53 @@ void Postfix::postfixTree(){
   int i = postfix.length();
   char digits[i];
   strcpy(digits,postfix.c_str());
-  std::cout << digits << std::endl;
-  for (int j = i; j <= i && j>0; j--) {
-    std::cout << "Digits value: " << digits[j-1]  << std::endl;
-    expression.insertPostFix(digits[j-1]);
-    expression.printTree();
+  std::stack<TreeNode<char>*> treestack;
+  TreeNode<char> * treenode = nullptr;
+  for (int j = 0; j < i-1; j++) {
+    if (isNum(digits[j])) {
+      treenode= new TreeNode<char>(digits[j]);
+      std::cout << "Digits: " << treenode->getData() << std::endl;
+      treestack.push(treenode);
+    }
+    if (isOp(digits[j])) {
+      //treenode->setData(digits[j]);
+      treenode = new TreeNode<char>(digits[j]);
+      treenode->setRight(treestack.top());
+      std::cout << "Data in node:" << treenode->getData() << std::endl;
+      treestack.pop();
+      treenode->setLeft(treestack.top());
+      std::cout << "Data in node:" << treenode->getData() << std::endl;
+      treestack.pop();
+      treestack.push(treenode);
+      expression.setRoot(treenode);
+      expression.printTree();
+      //leaf = node->getData();
+      //std::cout << "NODE Data: " << node->getData()->getData() << std::endl;
+      //std::cout << "NODE Data: " << node.getData().getData() << std::endl;
+      //leaf = node->getData();
+      //treenode->setLeft(leaf);
+      //node = trees.pop();
+    }
   }
-  expression.printInOrder();
-  expression.printTree();
 }
 
+
+//Methods to classify chars in numbers and operators
+bool Postfix::isOp(char c){
+  if (c=='+'||c=='*'||c=='^'||c=='-') {
+    return true;
+  }else{
+    return false;
+  }
+}
+
+bool Postfix::isNum(char c){
+  if (c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9'||c=='0') {
+    return true;
+  }else{
+    return false;
+  }
+}
 
 int Postfix::computeOperator(int num1, int num2, char sign)
 {

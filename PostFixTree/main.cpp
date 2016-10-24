@@ -17,5 +17,6 @@ int main()
 
   expression.convertToPostfix();
   std::cout << "Postfix: " << expression.getPostfix() << std::endl;
+
   return 0;
 }
