@@ -24,10 +24,10 @@ class BinarySearchTree {
         // Recursive methods, that take the root of the subtree
         void clear(TreeNode<T> * _root);
         void insert(TreeNode<T> * _root, TreeNode<T> * new_node);
-        // Special method to insert with difference restrictions
-        void insertPostFix(TreeNode<T> * _root, TreeNode<T> * new_node);
         void printInOrder(TreeNode<T> * _root);
         void printTree(TreeNode<T> * _root, int indent, char icon);
+        //Print in PostOrder
+        void printPostOrder(TreeNode<T> * _root);
 
     public:
         BinarySearchTree () {}
@@ -105,10 +105,24 @@ void BinarySearchTree<T>::printTree(TreeNode<T> * _root, int indent, char icon)
     }
 }
 
+//Aux method to print from outside
+template <class T>
+void BinarySearchTree<T>::printPostOrder() {
+  printPostOrder(root);
+}
+
 //Print the tree in PostOrder
 template <class T>
-void BinarySearchTree<T>::printPostOrder(){
-  
+void BinarySearchTree<T>::printPostOrder(TreeNode<T> * _root){
+  if (_root != nullptr)
+  {
+    //Call the left branch
+    printPostOrder(_root->getLeft());
+    //Call the right branch
+    printPostOrder(_root->getRight());
+    //after all the calls are made return and print the value
+    std::cout << " " << _root->getData() << " ";
+  }
 }
 
 #endif

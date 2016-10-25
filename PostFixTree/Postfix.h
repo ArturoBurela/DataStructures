@@ -32,18 +32,41 @@ class Postfix {
     public:
         Postfix () {}
         Postfix (std::string _infix) { infix = _infix; }
-        void setInfix (std::string _infix) { infix = _infix; }
+        void setInfix (std::string _infix) { infix = _infix;}
         void convertToPostfix();
         void postfixTree();
         int evaluate();
         std::string getPostfix() { return postfix; }
         void recursiveTreeEvaluate();
+        void print();
 };
+
+//Simple function to print all the postfix related data
+void Postfix::print() {
+  //Make sure the infix is converted to Postfix
+  convertToPostfix();
+  //create postfix tree
+  postfixTree();
+  //Print infix
+  std::cout << std::endl << "Infix: " << infix << std::endl;
+  //Print postfix
+  std::cout << "Postfix: " << postfix << std::endl;
+  //Print postfix tree
+  std::cout << "POSTFIX TREE: " << std::endl;
+  treepostfix.printTree();
+  //Print postfix evaluate
+  recursiveTreeEvaluate();
+  std::cout << "Tree in order" << std::endl;
+  treepostfix.printInOrder();
+  std::cout << std::endl;
+  //Print in PostOrder
+  std::cout << "Tree post order:" << std::endl;
+  treepostfix.printPostOrder();
+  std::cout << std::endl;
+}
 
 //Creates the postfix tree
 void Postfix::postfixTree(){
-  //Make sure the infix is converted to a Postfix string
-  convertToPostfix();
   //Create a stack to hold tree nodes
   Stack<TreeNode<char>*> treestack;
   //Create a new treenode pointer
@@ -71,8 +94,6 @@ void Postfix::postfixTree(){
   }
   //Set the root of the tree to the las pointer created
   treepostfix.setRoot(treenode);
-  //Print the tree
-  treepostfix.printTree();
 }
 
 //Used to call the recursive method
