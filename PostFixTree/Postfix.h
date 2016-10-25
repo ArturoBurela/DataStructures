@@ -1,5 +1,5 @@
 /*
-Class to convert a string to postfix from infix
+Class to convert a string to postfix from infix, it may create trees and evaluate them
 Arturo Burela
 A01019906
 */
@@ -11,7 +11,6 @@ A01019906
 #include <cmath>
 #include <string>
 #include <cstring>
-#include <stack>
 #include "Stack.h"
 #include "BinarySearchTree.h"
 
@@ -28,6 +27,8 @@ class Postfix {
         //Methods to classify chars in numbers and operators
         bool isOp(char c);
         bool isNum(char c);
+        //Evaluates the Postfix tree
+        int recursiveTreeEvaluate(TreeNode<char> * root);
     public:
         Postfix () {}
         Postfix (std::string _infix) { infix = _infix; }
@@ -36,14 +37,15 @@ class Postfix {
         void postfixTree();
         int evaluate();
         std::string getPostfix() { return postfix; }
-        int recursiveTreeEvaluate();
+        void recursiveTreeEvaluate();
 };
 
+//Creates the postfix tree
 void Postfix::postfixTree(){
   //Make sure the infix is converted to a Postfix string
   convertToPostfix();
   //Create a stack to hold tree nodes
-  std::stack<TreeNode<char>*> treestack;
+  Stack<TreeNode<char>*> treestack;
   //Create a new treenode pointer
   TreeNode<char> * treenode = nullptr;
   //Make a loop to go over the string
@@ -55,31 +57,43 @@ void Postfix::postfixTree(){
       //Push the treenode to the stack
       treestack.push(treenode);
     }
-    if (isOp(postfix.at(j))) {//Check if is is a valid operator
+    //Check if is is a valid operator
+    if (isOp(postfix.at(j))) {
       //Create a new treenode with the operator as data
       treenode = new TreeNode<char>(postfix.at(j));
-      //Get the top node and set as the right
-      treenode->setRight(treestack.top());
-      //erase the element from stack
-      treestack.pop();
+      //Get the top node and set as the right, it gets deleted from stack
+      treenode->setRight(treestack.popD());
       //Get the next stack node and set as the left
-      treenode->setLeft(treestack.top());
-      //erase the element from stack
-      treestack.pop();
+      treenode->setLeft(treestack.popD());
       //Push the new node that now has pointers to left and right
       treestack.push(treenode);
     }
   }
-  //Set the root of the tree to the las pointer
+  //Set the root of the tree to the las pointer created
   treepostfix.setRoot(treenode);
   //Print the tree
   treepostfix.printTree();
 }
 
+//Used to call the recursive method
+void Postfix::recursiveTreeEvaluate(){
+  std::cout << "Postfix tree evaluation result: "<< recursiveTreeEvaluate(treepostfix.getRoot()) << std::endl;
+}
+
+//Evaluates the tree
+int Postfix::recursiveTreeEvaluate(TreeNode<char> * root){
+  if (root->getLeft()==nullptr && root->getRight()== nullptr) { //If both next nodes are null we are in a leaf
+    //As we are on a leaf simple return the value, as the data is char we cast from ascii
+    return (int)root->getData() - 48;
+  }else{
+    //If nodes aren't null is an operator, we call compute with char operator and the recursive evaluate of both sides
+    return computeOperator(recursiveTreeEvaluate(root->getLeft()),recursiveTreeEvaluate(root->getRight()),root->getData());
+  }
+}
 
 //Methods to classify chars in numbers and operators
 bool Postfix::isOp(char c){
-  if (c=='+'||c=='*'||c=='^'||c=='-') {
+  if (c=='+'||c=='*'||c=='^'||c=='-'||c=='/'||c=='%') {
     return true;
   }else{
     return false;

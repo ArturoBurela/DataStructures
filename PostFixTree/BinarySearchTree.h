@@ -105,4 +105,10 @@ void BinarySearchTree<T>::printTree(TreeNode<T> * _root, int indent, char icon)
     }
 }
 
+//Print the tree in PostOrder
+template <class T>
+void BinarySearchTree<T>::printPostOrder(){
+  
+}
+
 #endif

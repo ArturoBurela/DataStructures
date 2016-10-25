@@ -11,9 +11,11 @@ int main()
 {
   Postfix expression;
   expression.setInfix("9-3*2^2+5+4^2^3");
+  // 9-3*2^4+5*2^3*2-4+8
   expression.postfixTree();
   std::cout << "Infix: 9-3*2^2+5" << std::endl;
   std::cout << "Postfix: " << expression.getPostfix() << std::endl;
+  expression.recursiveTreeEvaluate();
 
   return 0;
 }

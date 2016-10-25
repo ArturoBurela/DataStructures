@@ -23,7 +23,21 @@ class Stack {
         void push (Node<T> * new_node);
         Node<T> * pop ();
         Node<T> * top () { return head; }
+        T popD();
 };
+//popMethod
+template <class T>
+T Stack<T>::popD ()
+{
+    T data = head->getData();
+    Node<T> * item = head;
+    // Update the head of the list
+    head = item->getNext();
+    // Free the memory for the node
+    delete item;
+    // Return the data only
+    return data;
+}
 
 template <class T>
 void Stack<T>::clear()
