@@ -19,8 +19,6 @@ template <class T>
 class BinarySearchTree {
     private:
         TreeNode<T> * root = nullptr;
-        //variable to identify if we have reached te endo of the operators
-        bool end = false;
         // Recursive methods, that take the root of the subtree
         void clear(TreeNode<T> * _root);
         void insert(TreeNode<T> * _root, TreeNode<T> * new_node);
@@ -38,11 +36,9 @@ class BinarySearchTree {
         void setRoot(TreeNode<T> * _root) { root = _root; }
         void insert(T data);
         void insert(TreeNode<T> * new_node);
-        //Added special insert methods to store postfix without binary search restrictions
-        void insertPostFix(T data);
-        void insertPostFix(TreeNode<T> * new_node);
         void printInOrder() { printInOrder(root); }
         void printTree() { printTree(root, INCREMENT, '-'); }
+        //Method to print in PostOrder
         void printPostOrder();
 };
 
