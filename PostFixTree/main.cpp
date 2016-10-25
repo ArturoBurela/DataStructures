@@ -9,8 +9,11 @@ Program that creates Postfix Trees and Evaluates them
 #include "Postfix.h"
 int main()
 {
+  //Create new postfix
   Postfix expression;
+  //Set the infix value
   expression.setInfix("9-3*2^2+5+4^2^3");
+  //Print all the postfix data
   expression.print();
   return 0;
 }
