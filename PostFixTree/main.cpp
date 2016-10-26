@@ -11,9 +11,19 @@ int main()
 {
   //Create new postfix
   Postfix expression;
-  //Set the infix value
-  expression.setInfix("9-3*2^2+5+4^2^3");
-  //Print all the postfix data
-  expression.print();
+  //Store the infix
+  string infix = "";
+  while (infix!="q") { //Continue asking if infix is not q
+    std::cout << std::endl << std::endl << "ENTER THE INFIX TO CONVERT: (q to quit)" << std::endl;
+    std::cin >> infix;
+    if (infix=="q") {
+      std::cout << "Goodbye!" << std::endl;
+      break;
+    }
+    //Set infix
+    expression.setInfix(infix);
+    //Print all the postfix data
+    expression.print();
+  }
   return 0;
 }
