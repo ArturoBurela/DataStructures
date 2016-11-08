@@ -120,7 +120,7 @@ void AVLTree<T>::insert(TreeNode<T> * new_node){
   if (this->root == nullptr)
       this->root = new_node;
   else
-      this->root=insert(this->root, new_node);
+      this->root=BinarySearchTree<T>::insert(this->root, new_node);
 }
 
 #endif
