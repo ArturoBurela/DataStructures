@@ -1,5 +1,5 @@
 #include <iostream>
-#include "BinarySearchTree.h"
+#include "AVLTree.h"
 
 void menu();
 
@@ -7,13 +7,13 @@ int main()
 {
     std::cout << "BINARY SEARCH TREE TEST" << std::endl;
     menu();
-    
+
     return 0;
 }
 
 void menu()
 {
-    BinarySearchTree<int> tree;
+    AVLTree<int> tree;
     TreeNode<int> * node;
     int number;
     char ans = 'a';
@@ -108,5 +108,3 @@ void menu()
         }
     }
 }
-
-

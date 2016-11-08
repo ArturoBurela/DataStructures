@@ -1,7 +1,7 @@
 /*
     Class template for a Binary Search Tree
     Inherits from Binary Tree
-    
+
     Gilberto Echeverria
     gilecheverria@yahoo.com
     01/11/2016
@@ -14,12 +14,12 @@
 
 template <class T>
 class BinarySearchTree : public BinaryTree<T> {
-    private:
+protected:
         // Recursive methods, that take the root of the subtree
         void insert(TreeNode<T> * _root, TreeNode<T> * new_node);
         bool search(TreeNode<T> * _root, T data);
         TreeNode<T> * remove(TreeNode<T> * _root, T data);
-        
+
     public:
         BinarySearchTree () {}
         BinarySearchTree (TreeNode<T> * node) { this->root = node; }
